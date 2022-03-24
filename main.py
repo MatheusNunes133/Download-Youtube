@@ -1,55 +1,49 @@
-from pytube import YouTube
+from download import download_video_audio, download_audio, download_video
+from tkinter import *
 
-#Faz download do vídeo
-def download_video(url):
-    video = YouTube(url)
-    title_video = video.title
+#Construindo Janela
+main_frame = Tk()
 
-    download_video = video.streams.get_highest_resolution()
-    download_video.download(filename = 'Video_' + title_video + '.mp4')
+main_frame.title('Youtube Download')
 
-#Faz download do áudio
-def download_audio(url):
-    video = YouTube(url)
-    title_audio = video.title
+main_frame.geometry('400x300')
 
-    download_audio = video.streams.filter(only_audio = True)[0]
-    download_audio.download(filename = 'Audio_' + title_audio + '.mp3')
+main_title = Label(main_frame, text= 'Insira o Link do Vídeo', width= 50, height=3)
+main_title.grid(column=0, row=0)
 
-#Faz download do vídeo e do áudio
-def download_video_audio(url):
-    video = YouTube(url)
-    title = video.title
+text_inicial = Label(main_frame, text = 'Escolha um opção de Download:')
+text_inicial.grid(column=0, row=0)
 
-    download_video = video.streams.get_highest_resolution()
-    download_video.download(filename = 'Video_' + title + '.mp4')
-    
-    download_audio = video.streams.filter(only_audio = True)[0]
-    download_audio.download(filename = 'Audio_' + title + '.mp3')
+url_video_input = Entry(main_frame, width=40)
+url_video_input.grid(column=0, row=1)
 
-#Menu de opções
-controls_while = True
-while controls_while:
-    print('\nEscolha 1 para fazer o download de um vídeo')
-    print('Escolha 2 para fazer o download de um áudio')
-    print('Escolha 3 para fazer o download de um vídeo e de um áudio')
-    print('Escolha 0 para sair')
+def get_url_video():
+    url = url_video_input.get()
+    download_video(url)
+    status_download['text'] = 'Download concluído'
 
-    choose = int(input('Informe sua escolha:'))
+def get_url_audio():
+    url = url_video_input.get()
+    download_audio(url)
+    status_download['text'] = 'Download concluído'
 
-    if choose == 1:
-        url = str(input('Informe a url do vídeo:'))
-        download_video(url)
-        print('\nDownload concluido!\n')
-    elif choose == 2:
-        url = str(input('Informe a url do vídeo:'))
-        download_audio(url)
-        print('\nDownload concluido!\n')
-    elif choose == 3:
-        url = str(input('Informe a url do vídeo:'))
-        download_video_audio(url)
-        print('\nDownload concluido!\n')
-    elif choose == 0:
-        controls_while = False
-    else:
-        print('Não existe essa escolha!')
+def get_url_video_audio():
+    url = url_video_input.get()
+    download_video_audio(url)
+    status_download['text'] = 'Download concluído'
+
+choose_options = Label(main_frame, text = 'Escolha um opção de Download:', height=3)
+choose_options.grid(column=0, row=2)
+
+button_video = Button(main_frame, text = 'Vídeo', command = get_url_video)
+button_video.grid(column=0, row=3, pady=10)
+button_audio = Button(main_frame, text = 'Áudio', command = get_url_audio)
+button_audio.grid(column=0, row=4, pady=10)
+button_video_audio = Button(main_frame, text = 'Vídeo e Áudio', command = get_url_video_audio)
+button_video_audio.grid(column=0, row=5, pady=10)
+
+status_download = Label(main_frame, text = '')
+status_download.grid(column=0, row= 6)
+status_download['text'] = ''
+
+main_frame.mainloop()

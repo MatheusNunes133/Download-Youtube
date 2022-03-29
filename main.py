@@ -8,11 +8,8 @@ main_frame.title('Youtube Download')
 
 main_frame.geometry('400x300')
 
-main_title = Label(main_frame, text= 'Insira o Link do Vídeo', width= 50, height=3)
+main_title = Label(main_frame, text= 'Insira a url do Vídeo:', width= 50, height=3)
 main_title.grid(column=0, row=0)
-
-text_inicial = Label(main_frame, text = 'Escolha um opção de Download:')
-text_inicial.grid(column=0, row=0)
 
 url_video_input = Entry(main_frame, width=40)
 url_video_input.grid(column=0, row=1)

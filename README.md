@@ -7,7 +7,9 @@
 ### Crie um ambiente virtual
 
 2. Comando no terminal: `python(sua versão) -m venv .venv`
-3. Entre no ambiente virtual: `source .venv/bin/activate`
+3. Entre no ambiente virtual: 
+  Linux: `source .venv/bin/activate`
+  Windows: `.venv/Scripts/activate`
 
 ### Instale as dependências
 
@@ -16,3 +18,4 @@
 ### Inicie
 
 5. Comando no terminal: `python main.py`
+6. Ou execute um dos arquivos executáveis de acordo com seu sistema operacional
